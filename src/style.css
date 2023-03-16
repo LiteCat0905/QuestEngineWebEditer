@@ -1,0 +1,22 @@
+body{
+  background-color: rgb(16,16,20);
+}
+/* p{
+  color: RGB(213,213,214);
+}
+h1{
+  color: white;
+} */
+.router-link-active{
+  color: white
+}
+
+.app {
+  margin: 50px;
+  display: flex;
+  place-items: center;
+}
+
+.n-layout-scroll-container {
+  text-align: center;
+}
