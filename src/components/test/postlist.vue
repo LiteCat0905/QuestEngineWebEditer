@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { darkTheme } from "naive-ui";
-import SinglePost from "../components/SinglePost.vue"
+import SinglePost from "./SinglePost.vue"
 import { Qq } from '@vicons/fa';
 // defineComponent({
 //   darkTheme

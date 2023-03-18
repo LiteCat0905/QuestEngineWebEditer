@@ -1,97 +1,50 @@
 <script setup>
-import router from '../router';
 import { ref } from 'vue';
-import { useMessage } from 'naive-ui'
-import PostList from '../components/postlist.vue'
-import GetPosts from '../composibles/getPosts'
-import axios from 'axios';
-var baseurl = import.meta.env.VITE_V1_API
-const message = useMessage()
-const msgReactive = message.create("正在加载中···", {
-    type: "loading",
-    duration: 1e4
-});
-const load = async () => {
-    var url = baseurl + "/api/usrdata"
-    try {
-        var body_json = JSON.stringify({
-            "token": sessionStorage.getItem("token")
-        });
-        var customConfig = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-        let data = await axios.post(url, body_json, customConfig)
-        if (data.data.code == 200) {
-            name.value = data.data.name
-            mcid.value = data.data.mcid
-            uid.value = data.data.uid
-            sessionStorage.setItem("id", data.data.name);
-            sessionStorage.setItem("mcid", data.data.mcid);
-            sessionStorage.setItem("uid", data.data.uid);
-            loaded.value = false
-            msgReactive.type = "success"
-            msgReactive.content = "加载完成"
-            msgReactive.closable = true
+import COPY from "../components/copy.vue"; 
 
-        }
-        else {
-            var message__ = data.data.msg
-            message.warning(message__)
-            sessionStorage.clear()
-            router.push("/app")
-        }
-    } catch (error) {
-        console.error(error.code)
-        message.error(error.code)
-    }
-}
-load();
+var code = "不是你都没编辑呢。"
 
-
-
-const loaded = ref(true)
-const name = ref("")
-const mcid = ref("")
-const uid = ref("")
-const { posts, load_ } = GetPosts()
-load_()
 </script>
 
 <template>
     <n-space justify="center" size='small'>
 
-        <n-card title="用户信息" size="medium" class="left">
-            <n-skeleton v-if="loaded" text :repeat="6" />
-            <template v-else>
-                <n-grid x-gap="12" :cols="3">
-                    <n-grid-item>
-                        <n-statistic label="用户名" :value="name"></n-statistic>
-                    </n-grid-item>
-                    <n-grid-item>
-                        <n-statistic label="MCID" :value="mcid"></n-statistic>
-                    </n-grid-item>
-                    <n-grid-item>
-                        <n-statistic label="UID" :value="uid"></n-statistic>
-                    </n-grid-item>
-                </n-grid>
-                <br>
-                <router-link to="/app/bind/mcid">
-                    <n-alert v-if="mcid == 'None'" title="哇！你还有没绑定游戏ID" type="info">
-                        点这里去绑定吧！
-                    </n-alert>
+        <n-card title="" size="huge" class="left">
+            <n-h1 prefix="" align-text type="info">
+                <n-text type="info">
+                    Hi！今天做点什么？
+                </n-text>
+            </n-h1>
+            <n-space justify="space-around" size='large'>
+                <router-link to="/quest/add">
+                    <n-card title="" size="medium" embedded :bordered="true">
+                        <n-h4 prefix=""><n-text type="success">🧾你没事吗？</n-text></n-h4>
+                        <n-button type="info" dashed>
+                            创建新的任务
+                        </n-button>
+                    </n-card>
                 </router-link>
-            </template>
+                <!-- <router-link to="/cov/add"> -->
+                    <n-card title="" size="large" embedded :bordered="true">
+                        <n-h4 prefix=""><n-text type="success">🗣请打开麦克风交流</n-text></n-h4>
+                        <n-button type="warning" dashed>
+                            创建新的对话
+                        </n-button>
+                        <n-h6>还没写写完呐~</n-h6>
+                    </n-card>
+                <!-- </router-link> -->
+            </n-space>
         </n-card>
-
-        <n-card title="公告栏" size="medium" class="right notice">
-            <n-skeleton v-if="loaded" text :repeat="6" />
-            <template v-else>
-                <PostList :post="posts" />
-            </template>
-        </n-card>
-
+        <n-space vertical>
+            <n-card title="输出栏" size="medium" class="right">
+                <COPY :copytext="code"></COPY>
+                <n-code :code="code" language="yaml" show-line-numbers />
+            </n-card>
+            <n-card title="谢谢我自己" size="medium" class="right">
+                <iframe src="https://afdian.net/leaflet?slug=litecat" width="290" scrolling="no" height="200"
+                    frameborder="0"></iframe>
+            </n-card>
+        </n-space>
     </n-space>
 </template>
 
@@ -109,13 +62,9 @@ load_()
     margin-top: 50px;
 }
 
-.notice {
-    font-size: 200px;
-}
 
 .right {
     height: auto;
-    width: 300px;
     margin: 20px;
     margin-top: 50px;
 }

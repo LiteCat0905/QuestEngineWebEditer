@@ -1,5 +1,5 @@
 body{
-  background-color: rgb(16,16,20);
+  background-color: white;
 }
 /* p{
   color: RGB(213,213,214);
@@ -7,9 +7,6 @@ body{
 h1{
   color: white;
 } */
-.router-link-active{
-  color: white
-}
 
 .app {
   margin: 50px;
@@ -20,3 +17,11 @@ h1{
 .n-layout-scroll-container {
   text-align: center;
 }
+a {
+  text-decoration: none;
+}
+ 
+.router-link-active {
+  text-decoration: none;
+}
+

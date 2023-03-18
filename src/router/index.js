@@ -1,35 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { StartLoadingBar, FinishLoadingBar } from "../utils/loadingbar.js";
 const routes = [
 
-    { //AUTH
+    {// HOME
         path: '/',
-        name: 'Main',
-        component: () => import('../view/notoken.vue')
-    },
-    { //AUTH
-        path: '/auth/login',
-        name: 'Login',
-        component: () => import('../view/login.vue')
-    },
-    {
-        path: '/auth/register',
-        name: 'Register',
-        component: () => import('../view/register.vue')
-    },
-    {
-        path: '/auth/loginout',
-        name: 'LoginOut',
-        component: () => import('../view/loginout.vue')
-    },
-    {// APP
-        path: '/app',
         name: 'App',
-        component: () => import('../view/app.vue')
+        component: () => import('../view/app.vue'),
+        meta: {
+            title: "主页"
+        }
     },
-    {
-        path: '/app/bind/mcid',
-        name: 'BindMCID',
-        component: () => import('../view/bindmcid.vue')
+    {// QUEST/ADD
+        path: '/quest/add',
+        name: 'NewQuest',
+        component: () => import('../view/Quest/add.vue'),
+        meta: {
+            title: "创建任务"
+        }
     },
 
 ]
@@ -40,29 +27,16 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
-
-
 router.beforeEach((to, from, next) => {
-    if (to.path == '/') {
-        next()
-    }
-    else {
-        if (sessionStorage.getItem("token")) {
-            if (to.name == "Login" || to.name == "Register"){
-                next("/app")
-            }else{
-                next()
-            }
-        } else {
-            if (to.name == "Login" || to.name == "Register"){
-                next()
-            }else{
-                next('/auth/login')
-            }
-            
-        }
-    }
+    StartLoadingBar();
+    next();
 })
 
+router.afterEach((to) => {
+    if (to.meta.title) {
+        document.title = to.meta.title + " | QEWE"
+    }
+    FinishLoadingBar();
+})
 
 export default router

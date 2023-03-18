@@ -2,7 +2,7 @@
 <script setup>
 import { ref } from "vue";
 import axios from 'axios';
-import router from '../router';
+import router from '../../router';
 import { useMessage } from 'naive-ui';
 var baseurl = import.meta.env.VITE_V1_API
 const id_ = ref("");

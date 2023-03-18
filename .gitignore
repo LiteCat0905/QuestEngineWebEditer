@@ -11,9 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
-
+#Data
 data
-
+#Eslint
+eslintrc
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
