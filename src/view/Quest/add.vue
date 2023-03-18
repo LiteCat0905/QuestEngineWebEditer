@@ -423,7 +423,7 @@ function load() {
                 </n-dynamic-input>
             </n-space>
 
-            <pre>{{ JSON.stringify(formValue, null, 2) }}</pre>
+            <!-- <pre>{{ JSON.stringify(formValue, null, 2) }}</pre> -->
         </n-card>
         <n-space vertical>
             <n-card title="输出栏" size="medium" class="right">
