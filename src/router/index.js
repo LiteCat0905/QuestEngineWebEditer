@@ -18,6 +18,31 @@ const routes = [
             title: "创建任务"
         }
     },
+    {// QUEST/EDIT
+        path: '/quest/edit',
+        name: 'EditQuest',
+        component: () => import('../view/Quest/edit.vue'),
+        meta: {
+            title: "编辑任务"
+        }
+    },
+    {// COV/ADD
+        path: '/cov/add',
+        name: 'AddCov',
+        component: () => import('../view/Cov/add.vue'),
+        meta: {
+            title: "创建对话"
+        }
+    },
+    {// COV/EDIT
+        path: '/cov/edit',
+        name: 'EditCov',
+        component: () => import('../view/Cov/edit.vue'),
+        meta: {
+            title: "编辑对话"
+        }
+    },
+
 
 ]
 

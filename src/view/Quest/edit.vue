@@ -1,6 +1,7 @@
 <script setup>
-import { ArrowHookUpRight24Regular, CaretDown24Regular, CaretLeft24Regular } from '@vicons/fluent';
-import { toyaml } from '../../utils/toyaml';
+import { ArrowHookUpRight24Regular, CaretDown24Regular, ArrowHookUpLeft24Regular, CaretLeft24Regular } from '@vicons/fluent';
+import { toyaml,tojson } from '../../utils/toyaml';
+import { SendErrorMessage } from '../../utils/message';
 import { ref } from 'vue';
 import COPY from "../../components/copy.vue";
 function Istask(string) {
@@ -36,7 +37,7 @@ function Target_Create() {
         "trigger": []
     }
 }
-const code = ref("你还没生成东西呐！\n(⊙_⊙;)")
+const code = ref("请复制你的配置文件到这里~\n(●'◡'●)")
 const target_event = ref([
     {
         label: "TASK 定时器",
@@ -243,6 +244,13 @@ const formValue = ref({
 });
 function load() {
     code.value = toyaml(formValue.value)
+}
+function toleft() {
+    try {
+        formValue.value = tojson(code.value)
+    } catch (error) {
+        SendErrorMessage(error.message)
+    }
 
 }
 </script>
@@ -254,7 +262,7 @@ function load() {
             <n-space justify="space-between" size="large">
                 <n-h1 prefix="bar" align-text type="info">
                     <n-text type="info">
-                        创建任务
+                        编辑任务
                     </n-text>
                 </n-h1>
                 <n-button type="warning" size="medium" @click="load" dashed><template #icon>
@@ -452,11 +460,23 @@ function load() {
             <!-- <pre>{{ JSON.stringify(formValue, null, 2) }}</pre> -->
         </n-card>
         <n-space vertical>
-            <n-card title="输出栏" size="medium" class="right">
+            <n-space vertical>
 
-                <COPY :copytext="code"></COPY>
-                <n-code :code="code" language="yaml" show-line-numbers />
-            </n-card>
+                <n-card title="输出栏" size="medium" class="right">
+                    <n-space vertical>
+                        <n-button type="warning" size="medium" @click="toleft" dashed><template #icon>
+                                <n-icon>
+                                    <ArrowHookUpLeft24Regular />
+                                </n-icon>
+                            </template>向左同步</n-button>
+                        <COPY :copytext="code"></COPY>
+                    </n-space>
+                    <n-input v-model:value="code" type="textarea" placeholder="输出的东西~" :autosize="{
+                        minRows: 3
+                    }" @change="toleft" />
+
+                </n-card>
+            </n-space>
         </n-space>
     </n-space>
 </template>

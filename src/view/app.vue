@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import COPY from "../components/copy.vue"; 
+import COPY from "../components/copy.vue";
 
-var code = "不是你都没编辑呢。"
+var code = "不是你都没编辑呢。\n¯\\_(ツ)_/¯"
 
 </script>
 
@@ -19,20 +19,39 @@ var code = "不是你都没编辑呢。"
                 <router-link to="/quest/add">
                     <n-card title="" size="medium" embedded :bordered="true">
                         <n-h4 prefix=""><n-text type="success">🧾你没事吗？</n-text></n-h4>
-                        <n-button type="info" dashed>
-                            创建新的任务
+                        <n-button type="warning" dashed>
+                            创建新任务
                         </n-button>
                     </n-card>
                 </router-link>
-                <!-- <router-link to="/cov/add"> -->
+                <router-link to="/cov/add">
+                    <n-card title="" size="large" embedded :bordered="true">
+                        <n-h4 prefix=""><n-text type="success">🗣没事说说话</n-text></n-h4>
+                        <n-button type="warning" dashed>
+                            创建新对话
+                        </n-button><br><br>
+                        <a href="https://github.com/LiteCat0905/QuestEngineWebEditor" target="_blank"><n-tag type="info" size="medium">功能不全</n-tag><n-tag type="info" size="medium">欢迎PR</n-tag><n-tag type="warning" size="medium">右上角Github仓库</n-tag></a>
+                        
+                    </n-card>
+                </router-link>
+                <router-link to="/quest/edit">
+                    <n-card title="" size="large" embedded :bordered="true">
+                        <n-h4 prefix=""><n-text type="success">🧾你不改改吗？</n-text></n-h4>
+                        <n-button type="warning" dashed>
+                            编辑任务
+                        </n-button>
+                    </n-card>
+                </router-link>
+                <router-link to="/cov/edit">
                     <n-card title="" size="large" embedded :bordered="true">
                         <n-h4 prefix=""><n-text type="success">🗣请打开麦克风交流</n-text></n-h4>
                         <n-button type="warning" dashed>
-                            创建新的对话
-                        </n-button>
-                        <n-h6>还没写写完呐~</n-h6>
+                            编辑对话
+                        </n-button><br><br>
+                        <a href="https://github.com/LiteCat0905/QuestEngineWebEditor" target="_blank"><n-tag type="info" size="medium">功能不全</n-tag><n-tag type="info" size="medium">欢迎PR</n-tag><n-tag type="warning" size="medium">右上角Github仓库</n-tag></a>
+                        
                     </n-card>
-                <!-- </router-link> -->
+                </router-link>
             </n-space>
         </n-card>
         <n-space vertical>
